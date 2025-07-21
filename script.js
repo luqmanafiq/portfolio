@@ -9,7 +9,7 @@ document.querySelectorAll('.nav-links a').forEach(anchor => {
 // Typing animation
 document.addEventListener('DOMContentLoaded', function() {
     new Typed('#typed-text', {
-        strings: ["Front-End Developer", "Problem Solver"],
+        strings: ["Graduate Software Engineer", "Junior Data Scientist/Analyst", "Front-End Developer", "Junior ML Engineer", "Problem Solver", "Footballer"],
         typeSpeed: 50,
         backSpeed: 30,
         loop: true,
