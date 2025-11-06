@@ -3,158 +3,653 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Luqman Afiq | Developer</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Luqman Afiq | Full Stack Developer</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #0a192f;
+            --bg-secondary: #112240;
+            --text-primary: #ccd6f6;
+            --text-secondary: #8892b0;
+            --accent: #64ffda;
+            --accent-hover: #4ecdb0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .bg-animation span {
+            position: absolute;
+            display: block;
+            width: 2px;
+            height: 2px;
+            background: var(--accent);
+            opacity: 0.3;
+            animation: float 15s infinite;
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--accent);
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) translateX(0); }
+            25% { transform: translateY(-100px) translateX(50px); }
+            50% { transform: translateY(-200px) translateX(-50px); }
+            75% { transform: translateY(-100px) translateX(100px); }
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 25, 47, 0.9);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--accent);
+            text-shadow: 0 0 20px var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 1rem;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 5%;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-content .intro {
+            color: var(--accent);
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero-content h1 {
+            font-size: 4.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            background: linear-gradient(120deg, var(--accent), #5a67d8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { filter: drop-shadow(0 0 10px var(--accent)); }
+            to { filter: drop-shadow(0 0 20px var(--accent)); }
+        }
+
+        .hero-content h2 {
+            font-size: 2rem;
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            font-weight: normal;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        #typed-text {
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        .cta {
+            display: inline-block;
+            margin-top: 2rem;
+            padding: 1rem 2.5rem;
+            background: transparent;
+            color: var(--accent);
+            border: 2px solid var(--accent);
+            text-decoration: none;
+            font-size: 1.1rem;
+            border-radius: 5px;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--accent);
+            transition: left 0.3s;
+            z-index: -1;
+        }
+
+        .cta:hover::before {
+            left: 0;
+        }
+
+        .cta:hover {
+            color: var(--bg-primary);
+            box-shadow: 0 0 30px var(--accent);
+        }
+
+        /* Sections */
+        section {
+            padding: 100px 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        section h2 {
+            font-size: 3rem;
+            margin-bottom: 3rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60%;
+            height: 3px;
+            background: var(--accent);
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .about-content p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+        }
+
+        .skills-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            list-style: none;
+        }
+
+        .skills-list li {
+            color: var(--text-secondary);
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .skills-list li::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-size: 1.5rem;
+        }
+
+        .tech-icons {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .tech-icon {
+            width: 50px;
+            height: 50px;
+            filter: grayscale(100%);
+            transition: all 0.3s;
+            opacity: 0.7;
+        }
+
+        .tech-icon:hover {
+            filter: grayscale(0%);
+            opacity: 1;
+            transform: translateY(-5px);
+        }
+
+        /* Projects Section */
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .project-card {
+            background: var(--bg-secondary);
+            padding: 2rem;
+            border-radius: 10px;
+            transition: all 0.3s;
+            border: 1px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(100, 255, 218, 0.1), transparent);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent);
+            box-shadow: 0 10px 40px rgba(100, 255, 218, 0.2);
+        }
+
+        .project-card:hover::before {
+            opacity: 1;
+        }
+
+        .project-card h3 {
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .project-card p {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .project-tech {
+            color: var(--accent);
+            font-size: 0.9rem;
+            margin-top: 1rem;
+        }
+
+        .project-links {
+            margin-top: 1rem;
+        }
+
+        .project-links a {
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            margin-right: 1rem;
+            transition: all 0.3s;
+            position: relative;
+            z-index: 10;
+        }
+
+        .project-links a:hover {
+            color: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        /* Contact Section */
+        #contact {
+            text-align: center;
+            padding: 150px 5%;
+        }
+
+        #contact h2 {
+            font-size: 3.5rem;
+            margin-bottom: 2rem;
+        }
+
+        #contact p {
+            font-size: 1.3rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 3rem;
+        }
+
+        /* Social Links */
+        .social-links {
+            position: fixed;
+            bottom: 0;
+            left: 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            z-index: 100;
+        }
+
+        .social-links::after {
+            content: '';
+            width: 2px;
+            height: 100px;
+            background: var(--text-secondary);
+            margin: 1rem auto 0;
+        }
+
+        .social-links a {
+            color: var(--text-secondary);
+            font-size: 1.5rem;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            color: var(--accent);
+            transform: translateY(-5px);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-content h2 {
+                font-size: 1.3rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            .project-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .social-links {
+                display: none;
+            }
+
+            section h2 {
+                font-size: 2rem;
+            }
+        }
+
+        /* Scroll Indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-20px); }
+            60% { transform: translateX(-50%) translateY(-10px); }
+        }
+
+        .scroll-indicator i {
+            color: var(--accent);
+            font-size: 2rem;
+        }
+    </style>
 </head>
 <body>
-    <!-- Side Navbar -->
-    <nav class="sidebar">
+    <!-- Animated Background -->
+    <div class="bg-animation" id="bgAnimation"></div>
+
+    <!-- Navigation -->
+    <nav>
         <div class="logo">LA</div>
         <ul class="nav-links">
-            <li><a href="#home"><i class="fas fa-home"></i> Home</a></li>
-            <li><a href="#about"><i class="fas fa-user"></i> About</a></li>
-            <li><a href="#projects"><i class="fas fa-code"></i> Projects</a></li>
-            <li><a href="#contact"><i class="fas fa-envelope"></i> Contact</a></li>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
         </ul>
-        <div class="social-links">
-            <a href="https://github.com/luqmanafiq" target="_blank"><i class="fab fa-github"></i></a>
-            <a href="https://www.linkedin.com/in/luqman-afiq-kamarul-azman-7850472a6/" target="_blank"><i class="fab fa-linkedin"></i></a>
-        </div>
     </nav>
 
-    <!-- Main Content -->
-    <main>
-        <section id="home" class="section hero">
-            <div class="hero-content">
-                <p class="intro">Hello World, my name is</p>
-                <h1>Luqman Afiq</h1>
-                <h2>Welcome to my Sanctuary.</h2>
-                <p>I’m a software engineering grad at Newcastle University, specializing in software development, AI, and love Data. This is the place where I like to store all my projects from freeCodeCamp using AI. </p>
-                <p><span id="typed-text"></span></p>
-                <a href="#projects" class="cta">Check out my work</a>
-            </div>
-        </section>
+    <!-- Social Links -->
+    <div class="social-links">
+        <a href="https://github.com/luqmanafiq" target="_blank"><i class="fab fa-github"></i></a>
+        <a href="https://www.linkedin.com/in/luqman-afiq-kamarul-azman-7850472a6/" target="_blank"><i class="fab fa-linkedin"></i></a>
+    </div>
 
-        <section id="about" class="section">
-            <h2>About Me</h2>
-            <div class="about-content">
-                <p>I graduated with BSc Computer Science (Software Engineering) student at Newcastle University with First-Class 1:1, passionate about building scalable, user-friendly applications.</p>
-                <p>Here are some technologies I’ve worked with:</p>
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <p class="intro">Hi, my name is</p>
+            <h1>Luqman Afiq</h1>
+            <h2>Full Stack Developer & ML Enthusiast</h2>
+            <p>Fresh graduate from Newcastle University (First-Class Honours) passionate about building scalable applications with Python, PyTorch, Spring Boot, and modern web technologies.</p>
+            <p><span id="typed-text"></span></p>
+            <a href="#projects" class="cta">Check out my work</a>
+        </div>
+        <div class="scroll-indicator">
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <h2>About Me</h2>
+        <div class="about-content">
+            <div>
+                <p>I'm a BSc Computer Science graduate from Newcastle University with First-Class Honours (1:1), passionate about building scalable, user-friendly applications. My expertise spans full-stack development and machine learning, with a focus on creating innovative solutions to complex problems.</p>
+                <p>Throughout my journey, I've worked with various technologies and frameworks, from building AI-powered applications to developing distributed systems. I love tackling challenges that push me to learn and grow as a developer.</p>
+                <p>Here are some technologies I work with:</p>
                 <ul class="skills-list">
                     <li>Python & PyTorch</li>
-                    <li>JavaScript, HTML, CSS</li>
+                    <li>JavaScript & React</li>
                     <li>C & Java</li>
-                    <li>SQL</li>
-                    <li>AWS & Docker</li>
-                    <li>Apache</li>
-                    <li>Neural Network & XGBoost</li>
+                    <li>Flask & Spring Boot</li>
+                    <li>SQL & MongoDB</li>
+                    <li>Docker & AWS</li>
                 </ul>
             </div>
-        </section>
+            <div class="tech-icons">
+                <img class="tech-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pytorch/pytorch-original.svg" alt="PyTorch">
+                <img class="tech-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python">
+                <img class="tech-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript">
+                <img class="tech-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React">
+                <img class="tech-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" alt="MongoDB">
+                <img class="tech-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" alt="Docker">
+                <img class="tech-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mysql/mysql-original-wordmark.svg" alt="MySQL">
+                <img class="tech-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original-wordmark.svg" alt="AWS">
+                <img class="tech-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/apachekafka/apachekafka-original.svg" alt="ApacheKafka">
+            </div>
+        </div>
+    </section>
 
-        <section id="projects" class="section">
-            <h2>Projects</h2>
-            <div class="project-list">
-                <div class="project-item">
-                    <h3>How to win League of Legends</h3>
-                    <p>💡 Built a NLP helper for League of Legends using Python, PyTorch, and Flask. Integrated machine learning to analyze trends from large datasets, with a user-friendly dashboard for real-time updates.</p>
-                    <p><strong>Tech:</strong> PyTorch, Gradio, NLP, Neural Network, RiotAPI</p>
-                    <div class="project-links">
-                        <a href="https://github.com/luqmanafiq/AI-and-ML-LOL" target="_blank"><i class="fab fa-github"></i></a>
-                    </div>
-                </div>
-                <div class="project-item"><img src="mf.jpg" alt="">
-                    <h3>MLOps Pipeline– YouTube Viewer Sentiment</h3>
-                    <p>📚 Build an end-to-end MLOps pipeline that analyzes YouTube sentiment in real-time through a Chrome extension. Master modern ML tools like MLflow, DVC, Docker, and AWS while developing a complete solution from data collection to deployment. Gained hands-on experience with real-world ML engineering and MLOps practices.</p>
-                    <p><strong>Tech:</strong> Python, AWS, Docker, ML</p>
-                    <div class="project-links">
-                        <a href="https://github.com/luqmanafiq/4health" target="_blank"><i class="fab fa-github"></i></a>
-                    </div>
-                </div>
-                <div class="project-item">
-                    <h3>4Health Web App</h3>
-                    <p>🏥 A team-based web app to monitor daily health indicators (steps, sleep, calories, weight). Features interactive graphs and security measures, coordinated via GitHub.</p>
-                    <p><strong>Tech:</strong> JavaScript, HTML, CSS, GitHub</p>
-                    <div class="project-links">
-                        <a href="https://github.com/luqmanafiq/4health" target="_blank"><i class="fab fa-github"></i></a>
-                    </div>
-                </div>
-                <div class="project-item">
-                    <h3>AWS Serverless chatbot</h3>
-                    <p>🗣️ Serverless chatbot using AWS Lambda and API Gateway. Fully functional chatbot architecture. Asynchronous workflows, JSON parsing, and Lambda triggers</p>
-                    <p><strong>Tech:</strong>AWS Lambda, DynamoDB, serverless apps, REST API</p>
-                    <div class="project-links">
-                        <a href="https://github.com/luqmanafiq/AWS-Chatbot" target="_blank"><i class="fab fa-github"></i></a>
-                    </div>
-                </div>
-                <div class="project-item">
-                    <h3>LoL Item Recommender</h3>
-                    <p>🧠 LLM-based recommender for League item builds. Continuation from my Dissertation "How to win in League". Adapts LLM logic and semantic context to recommend in-game items</p>
-                    <p><strong>Tech:</strong> LLM, embeddings, game AI, context-aware inference</p>
-                    <div class="project-links">
-                        <a href="https://github.com/luqmanafiq/lol-item-recommender" target="_blank"><i class="fab fa-github"></i></a>
-                    </div>
-                </div>
-                <div class="project-item">
-                    <h3>Rental Validator Images (KCS Hackathon)</h3>
-                    <p>🏠 Image classification tool for rental item damage. Uses OpenCV + CNNs to detect object damage pre/post rental</p>
-                    <p><strong>Tech:</strong> PyTorch, OpenCV, image pre-processing, computer vision</p>
-                    <div class="project-links">
-                        <a href="https://github.com/luqmanafiq/rental-validator" target="_blank"><i class="fab fa-github"></i></a>
-                    </div>
-                </div>
-                <div class="project-item">
-                    <h3>Page_rank project</h3>
-                    <p>🔗 Graph algorithm visualizer for PageRank. Implements link analysis algorithm</p>
-                    <p><strong>Tech:</strong> Graph theory, algorithms, Python, matplotlib</p>
-                    <div class="project-links">
-                        <a href="https://github.com/luqmanafiq/page_rank-project" target="_blank"><i class="fab fa-github"></i></a>
-                    </div>
-                </div>
-                <div class="project-item">
-                    <h3>Robotti Fault Systems</h3>
-                    <p>🤖 SWE personal project exploring fault injection and tolerance in Robotti, an autonomous farm vehicle, using a co-simulated environment.</p>
-                    <p><strong>Tech:</strong> INTOCPS, Fault Tolerance, control logic, simulation</p>
-                    <div class="project-links">
-                        <a href="https://github.com/luqmanafiq/fault-tolerant-robotti" target="_blank"><i class="fab fa-github"></i></a>
-                    </div>
-                </div>
-                <div class="project-item">
-                    <h3>Lottery WebApp</h3>
-                    <p>🎰 Flask-based web app to simulate lottery systems. Includes ticket logic, win checking, and UI</p>
-                    <p><strong>Tech:</strong> Flask, logic building, web forms</p>
-                    <div class="project-links">
-                        <a href="https://github.com/luqmanafiq/LotteryWebApp" target="_blank"><i class="fab fa-github"></i></a>
-                    </div>
-                </div>
-                <div class="project-item">
-                    <h3>Data Visualization Dashboard</h3>
-                    <p>🗺️ Created an interactive web-based dashboard to visualize global country data with multiple views and indicators using Vega-Altair.</p>
-                    <p><strong>Tech:</strong> JavaScript, Vega-Altair, HTML, CSS</p>
-                    <div class="project-links">
-                        <a href="https://github.com/luqmanafiq/data-visual-map" target="_blank"><i class="fab fa-github"></i></a>
-                    </div>
-                </div>
-                <div class="project-item">
-                    <h3>Reversi game</h3>
-                    <p>🎮 Object-oriented board game implementation in Java</p>
-                    <p><strong>Tech:</strong> Java, OOP, game logic</p>
-                    <div class="project-links">
-                        <a href="https://github.com/luqmanafiq/reversi-game" target="_blank"><i class="fab fa-github"></i></a>
-                    </div>
+    <!-- Projects Section -->
+    <section id="projects">
+        <h2>Featured Projects</h2>
+        <div class="project-grid">
+            <div class="project-card">
+                <h3>AI Bot for League of Legends</h3>
+                <p>Built an intelligent bot helper using PyTorch and Flask that analyzes game trends from large datasets. Features a user-friendly dashboard with real-time updates and machine learning-powered insights.</p>
+                <p class="project-tech"><strong>Tech:</strong> Python, PyTorch, Flask, Data Visualization</p>
+                <div class="project-links">
+                    <a href="https://github.com/luqmanafiq/AI-and-ML-LOL" target="_blank"><i class="fab fa-github"></i></a>
                 </div>
             </div>
-        </section>
 
-        <section id="contact" class="section">
-            <h2>Get In Touch</h2>
-            <p>I’m open to opportunities and collaborations. Reach out!</p>
-            <a href="mailto:luqmanafiq135.la@gmail.com" class="cta">Say Hello</a>
-        </section>
-    </main>
+            <div class="project-card">
+                <h3>4Health Web App</h3>
+                <p>Team-based health monitoring web application tracking daily indicators including steps, sleep, calories, and weight. Features interactive visualizations and robust security measures.</p>
+                <p class="project-tech"><strong>Tech:</strong> JavaScript, python, SQL, RestAPI</p>
+                <div class="project-links">
+                    <a href="https://github.com/luqmanafiq/4health" target="_blank"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <h3>Cloudflare LLM</h3>
+                <p>An intelligent AI-powered study assistant built with Cloudflare Agents SDK, Workers AI (Llama 3.3), and real-time chat capabilities.</p>
+                <p class="project-tech"><strong>Tech:</strong> Cloudflare Agents SDK + WorkersAI, TypeScript</p>
+                <div class="project-links">
+                    <a href="https://github.com/luqmanafiq/cf_ai_sudy_ai" target="_blank"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <h3>Student quiz database</h3>
+                <p> Build a command-line quiz management system for Newcastle University College to help students with exam revision.</p>
+                <p class="project-tech"><strong>Tech:</strong> Java, Hibernate</p>
+                <div class="project-links">
+                    <a href="https://github.com/luqmanafiq/student-quiz" target="_blank"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <h3>Youtube comment analysis</h3>
+                <p>Built an end-to-end pipeline to classify YouTube comment sentiment using NLP.</p>
+                <p class="project-tech"><strong>Tech:</strong>Chrome extensions, pytorch, mlflow </p>
+                <div class="project-links">
+                    <a href="https://github.com/luqmanafiq/MLOps-Youtube-Sentiment"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <h2>Get In Touch</h2>
+        <p>I'm currently open to new opportunities and collaborations. Whether you have a question or just want to say hi, feel free to reach out!</p>
+        <a href="mailto:luqmanafiq135.la@gmail.com" class="cta">Say Hello</a>
+    </section>
 
     <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
-    <script src="script.js"></script>
+    <script>
+        // Typed.js animation
+        const typed = new Typed('#typed-text', {
+            strings: ['I build scalable web applications.', 'I develop ML models.', 'I solve complex problems.', 'I create innovative solutions.'],
+            typeSpeed: 50,
+            backSpeed: 30,
+            backDelay: 2000,
+            loop: true
+        });
+
+        // Animated background particles
+        const bgAnimation = document.getElementById('bgAnimation');
+        for (let i = 0; i < 50; i++) {
+            const span = document.createElement('span');
+            span.style.left = Math.random() * 100 + '%';
+            span.style.top = Math.random() * 100 + '%';
+            span.style.animationDelay = Math.random() * 15 + 's';
+            span.style.animationDuration = (Math.random() * 10 + 10) + 's';
+            bgAnimation.appendChild(span);
+        }
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Scroll reveal animation
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.project-card, section').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 0.6s ease-out';
+            observer.observe(el);
+        });
+    </script>
 </body>
 </html>
+
+
+
+
